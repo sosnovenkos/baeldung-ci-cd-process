@@ -15,7 +15,36 @@
     <description>baeldung-ci-cd-process</description>
     <properties>
         <java.version>11</java.version>
+        <DockerHubUsername>1451272</DockerHubUsername>
     </properties>
+
+    <profiles>
+        <profile>
+        <id>deploy-docker</id>
+        <properties>
+            <maven.deploy.skip>true</maven.deploy.skip>
+        </properties>
+        <build>
+            <plugins>
+                <plugin>
+                    <groupId>com.google.cloud.tools</groupId>
+                    <artifactId>jib-maven-plugin</artifactId>
+                    <version>2.2.0</version>
+                    <configuration>
+                        <to>
+                            <image>${DockerHubUsername}/baeldung-ci-cd-process</image>
+                            <tags>
+                                <tag>${project.version}</tag>
+                                <tag>latest</tag>
+                            </tags>
+                        </to>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </build>
+    </profile>
+    </profiles>
+
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
