@@ -1,11 +1,9 @@
 language: java
 jdk:
   - openjdk11
-
 before_install:
   - echo "Pale1956we" | docker login -u "1451272" --password-stdin
   - docker pull openjdk:11-jre-slim-sid
-
 script:
   - ./mvnw clean install
   - ./mvnw deploy jib:build -P deploy-docker
